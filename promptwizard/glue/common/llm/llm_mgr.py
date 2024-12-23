@@ -35,6 +35,15 @@ def call_api(messages):
     prediction = response.choices[0].message.content
     return prediction
 
+def call_api_by_openai(messages):
+    from openai import OpenAI
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"],base_url=os.environ["OPENAI_BASE_URL"])
+    response = client.chat.completions.create(
+        model=os.environ["OPENAI_MODEL_NAME"],
+        messages=messages,
+    )
+    prediction = response.choices[0].message.content
+    return prediction
 
 
 class LLMMgr:
@@ -42,10 +51,12 @@ class LLMMgr:
     def chat_completion(messages: Dict):
         llm_handle = os.environ.get("MODEL_TYPE", "AzureOpenAI")
         try:
-            if(llm_handle == "AzureOpenAI"): 
+            if llm_handle == "AzureOpenAI":
                 # Code to for calling LLMs
                 return call_api(messages)
-            elif(llm_handle == "LLamaAML"):
+            elif llm_handle == "OpenAI":
+                return call_api_by_openai(messages)
+            elif llm_handle == "LLamaAML":
                 # Code to for calling SLMs
                 return 0
         except Exception as e:
