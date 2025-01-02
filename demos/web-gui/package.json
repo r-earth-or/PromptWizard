@@ -1,0 +1,17 @@
+{
+  "name": "web-gui",
+  "version": "1.0.0",
+  "description": "A simple web GUI for prompt optimization using Vue.js and Vite",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "vite": "^2.5.0"
+  }
+}
